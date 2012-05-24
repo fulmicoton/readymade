@@ -1,0 +1,45 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	padding: 30px 50px;
+}
+
+h1 {
+	color: #fff;
+	background-color: #09f;
+	padding: 15px 50px;
+	margin: 0px -50px;
+	font-size: 51px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	margin-bottom: 18px;
+	text-rendering: optimizelegibility;
+}
+
+body.error h1 {
+	background-color: #d20;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: #03d;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #444;
+}
+
+pre {
+	width: auto;
+	padding: 10px;
+	border: solid 1px #eee;
+}

@@ -1,0 +1,17 @@
+doctype 5
+html(lang="en")
+  head
+    title Content of : #{directory_path}
+  body
+    | <style type="text/css">
+    include ./style.css
+    | </style>
+    h1 Content of : #{directory_path}
+    ul
+      li
+        a(href='.') .
+      li
+        a(href='..') ..
+      each file in files
+        li
+          a(href="#{file}") #{file}

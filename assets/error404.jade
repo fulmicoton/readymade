@@ -1,0 +1,10 @@
+doctype 5
+html(lang="en")
+  head
+    title Error while building : #{filepath}
+  body(class="error")
+    | <style type="text/css">
+    include ./style.css
+    | </style>
+    h1 Error while building : #{filepath}
+    pre #{ error_msg }
