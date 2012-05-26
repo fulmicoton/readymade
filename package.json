@@ -22,6 +22,7 @@
 ,   "browserify": "1.10.14"
 ,   "mime": "1.0.0"
 ,   "jade": "0.26.0"
+,   "argparser": "0.2.1"
 }
 , "bin": {
     "readymade": "./bin/readymade"
