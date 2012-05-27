@@ -1,30 +1,44 @@
 Readymade
 =====================================
 
-
-
-
-
-What is it?
--------------------------------------
-
-**readymade** is for webprogrammers.
+Readymade is for webprogrammers.
 In addition to static files, some of your assets (JavaScript, CSS, Images, ...) have to be compiled before being served to your browser.
 
-**readymade** typically replaces the **-watch** solution, or the plugin in your web framework by a simple generic solution for all of your assets. It handles creating new directories, and chains of compilation (e.g. if want my coffeescript to be compiled, and then minified).
+Readymade typically replaces the **-watch** solution, or the plugin in your web framework by a simple generic solution for all of your assets. It handles creating new directories, and chains of compilation (e.g. if want my coffeescript to be compiled, and then minified).
 
-**readymade** makes it easy to have those compiled on the fly 
+Readymade makes it easy to have those compiled on the fly 
 when requested and when your source files have been modified.
-Typically the following are handled by default by
+
+
+
+Which type of asset are handled ?
+-------------------------------------
+
+The following assets are handled by default are handled by default by
 readymade :
 
-- [CoffeeScript](http://coffeescript.org/)
-- [Coco](http://satyr.github.com/coco/)
-- [LiveScript](http://gkz.github.com/LiveScript/) 
-- [Less](http://lesscss.org/)
-- [Sass](http://sass-lang.com/)
-- [uglifyJS](https://github.com/mishoo/UglifyJS)
-- [Markdown via Markitup](https://github.com/nathan-lafreniere/markitup)
+- [[⇥]](http://coffeescript.org/) CoffeeScript :
+   
+  **.coffee** → **.js**
+- [[⇥]](http://satyr.github.com/coco/) Coco :
+  
+  **.coco** → **.js**
+- [[⇥]](http://gkz.github.com/LiveScript/) LiveScript :
+  
+  **.ls** → **.js**
+- [[⇥]](http://lesscss.org/) Less :
+  
+  **.less** → **.css**
+- [[⇥]](http://sass-lang.com/) Sass : 
+  
+  **.sass**  or **.scss** → **.css**
+- [[⇥]](https://github.com/mishoo/UglifyJS) uglifyJS :
+  
+  **.min.js**  → **.js**
+- [[⇥]](https://github.com/nathan-lafreniere/markitup) Markdown via Markitup 
+  
+  **.md** → **.html** or **.md** + **.jade**  → **.html** 
+- Plain static files which do not require any compilation.
 
 You may extend this list by editing a Makefile of your own.
 Once started, readymade acts like a web server. 
@@ -37,22 +51,14 @@ Once started, readymade acts like a web server.
 How to install / how to use ?
 -------------------------------------
 
-First, readymade requires you to have installed beforehands :
+First, readymade requires you to have installed beforehands make, nodeJS, npm, and all the command line compiler for the file you want to serve.
 
-- make (probably already on your computer if you're using Linux or MacOS)
-- NodeJS
-- npm
-- the command-line compiler for the file you want to serve.
-
-
-To install **readymade**, you first need to have 
-[NodeJS](http://nodejs.org/#download) and npm installed on your computer.
-
-Once down, just run :
+Then to install it just run the following command (or sudo it depeding on your npm/node installation):
   
 	npm install readymade -g
 
-Then have readymade serve all your files on http://localhost:10000/ by running :
+
+Then have readymade serve all your files on your [port 10000](http://localhost:10000/) by place yourself in the repertory you want to serve and run :
 
 	readymade serve
 
@@ -67,3 +73,4 @@ and your browser requests for
 ReadyMade will compile your CoffeeScript file into JavaScript and serve it. For more information about available options just hit
 
 	readymade help
+

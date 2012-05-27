@@ -3,7 +3,7 @@
 	coffee -c $^
 
 # Uglify-js
-%-min.js: %.js
+%.min.js: %.js
 	uglifyjs -o $@ $^
 
 # Coco
@@ -30,8 +30,6 @@
 
 
 
-
-
 # compiles html files using markitup
 %.html: %.md %.jade
 	markitup -t $(word 2,$^) $< --output `dirname $@`
@@ -41,10 +39,8 @@
 	markitup -t $(word 2,$^) $< --output `dirname $@`
 
 # Fallback to markdown default template if template does not exists
-%.html: %.md
-	echo "here"
-	echo ${ASSET_PATH}	
-	markitup $< --output `dirname $@`
+%.html: %.md ${ASSET_PATH}/readymademd.jade ${ASSET_PATH}/readymademd.css
+	markitup -t ${ASSET_PATH}/readymademd.jade $< --output `dirname $@`
 
 %: %
 
