@@ -12,6 +12,9 @@ bin/readymade: ${TARGETS}
 	cat lib/cli.js >> bin/readymade
 	chmod +x bin/readymade
 
+publish: all
+	npm publish .
+
 #uninstall:
 #		echo "uninstall"
 #		npm uninstall tumbler
@@ -35,5 +38,3 @@ bin/readymade: ${TARGETS}
 #runserver: install
 #		node node_modules/.bin/tumbler serve 
 #
-#publish: bin lib
-#		npm publish tumbler
