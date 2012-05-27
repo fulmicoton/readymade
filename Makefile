@@ -14,27 +14,3 @@ bin/readymade: ${TARGETS}
 
 publish: all
 	npm publish .
-
-#uninstall:
-#		echo "uninstall"
-#		npm uninstall tumbler
-#
-#ginstall: bin lib
-#		npm install ./tumbler -g
-#
-#install: uninstall bin lib 
-#		npm install ./tumbler
-#
-#lib: 
-#		coffee -c tumbler/src/utils.coffee
-#		coffee -c tumbler/src/tumbler.coffee
-#		mv tumbler/src/tumbler.js tumbler/lib/
-#		mv tumbler/src/utils.js tumbler/lib/
-#
-#test: install
-#		coffee tumbler/test/test1.coffee
-#		./node_modules/.bin/tumbler tumbler/test/examples/test1.js
-#
-#runserver: install
-#		node node_modules/.bin/tumbler serve 
-#
