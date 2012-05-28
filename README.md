@@ -32,9 +32,12 @@ readymade :
 - [[⇥]](http://sass-lang.com/) Sass : 
   
   **.sass**  or **.scss** → **.css**
+- [[⇥]](http://learnboost.github.com/stylus/) Stylus
+  
+  **.styl** → **.css**
 - [[⇥]](https://github.com/mishoo/UglifyJS) uglifyJS :
   
-  **.min.js**  → **.js**
+  **.js**  → **.min.js**
 - [[⇥]](https://github.com/nathan-lafreniere/markitup) Markdown via Markitup 
   
   **.md** → **.html** or **.md** + **.jade**  → **.html** 
