@@ -1,6 +1,6 @@
 child_process = require 'child_process'
 path = require 'path'
-
+growl = require 'growl'
 
 extend=(c, objs...)->
     for obj in objs
@@ -22,11 +22,18 @@ class Builder
         error_msg = ""
         make_process.stderr.on "data",(data)->
             error_msg += data.toString()
-        make_process.on 'exit', (code)->
+        make_process.on 'exit', (code)=>
             if (code == 0)
                 success target
             else
-                console.log error_msg
+                @onError
+                    msg: error_msg
+                    target: target
                 failure error_msg
+    
+    onError: (options)->
+        console.log options.msg
+        msg = options.msg.trim().split("\n")[0]
+        growl? msg, {title: options.target + " build failed."}
 
 module.exports = Builder
