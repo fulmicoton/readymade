@@ -28,7 +28,9 @@
 %.css: %.sass
 	sass $^ $@
 
-
+# Stylus (.styl)
+%.css: %.styl
+	stylus $^
 
 # compiles html files using markitup
 %.html: %.md %.jade
