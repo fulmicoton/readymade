@@ -33,10 +33,10 @@ serve_static_file = (response,filepath)->
                 serve_directory_listing response,filepath
             else
                 content_type =  mime.lookup filepath
-                response.writeHead 200,
-                    'content-type': content_type
                 file = fs.createReadStream filepath
                 file.pipe response
+                response.writeHead 200,
+                    'content-type': content_type
         else
             response.writeHead 404
             response.end TEMPLATES.error404
@@ -45,27 +45,36 @@ serve_static_file = (response,filepath)->
         response.writeHead 500
         response.end "Error "+error_msg
 
+
 class Server
 
-    constructor: (@host,@port,@builder)->
-        
+    constructor: (options)->
+        @host = options.host
+        @port = options.port
+        @builder = options.builder
+        @build_path = options.build_path
+    
     handle: (request, response)->
         response.setHeader "Access-Control-Allow-Origin", "*"
         url = request.url
         console.log 'GET ', url
-        url_base = url.split '?', 1
-        filepath = '.' + url_base
-        serve_file = (filepath)->
-            serve_static_file response,filepath
+        url_base = url.split('?', 1)[0]
+        target = path.join @build_path, url_base
+        serve_file = (target)->
+            serve_static_file response, target
         failure_callback = (error_msg)->
             response.writeHead 404
             response.end TEMPLATES.error404
-                filepath: filepath
+                filepath: target
                 error_msg: error_msg
-        @builder.build filepath, serve_file, failure_callback
-        
+        @builder.build target, serve_file, failure_callback
+
+
+    url: ->
+        "http://" + @host + ":" + @port
+
     run: ->
         server = http.createServer (args...)=>@handle(args...)
-        server.listen(@port)
+        server.listen @port, @host
 
 module.exports = Server

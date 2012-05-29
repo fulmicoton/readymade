@@ -14,10 +14,11 @@ ENVIRONMENT = extend {}, process.env, 'ASSET_PATH': ASSET_PATH
 
 class Builder
     
-    constructor: (@makefile_path)->
-        
+    constructor: (@parameters)->
+    
     build: (target, success, failure)->
-        make_argv = [ '-f', @makefile_path, target]
+        make_argv = [ '-f', @parameters.makefile_path, target ]
+        ENVIRONMENT.build_path = @parameters.build_path
         make_process = child_process.spawn 'make', make_argv, env: ENVIRONMENT
         error_msg = ""
         make_process.stderr.on "data",(data)->

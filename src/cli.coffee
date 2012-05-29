@@ -21,20 +21,32 @@ argument_parser = cli_action
     
     serve:
         handle: (options)->
-            console.log "Listening on " + options.host + ":" + options.port
-            builder = new Builder options.makefile
-            server = new Server options.host, options.port, builder
+            builder = new Builder
+                makefile_path: options.makefile
+                build_path: options.dest
+            server = new Server
+                host: options.host
+                port: options.port
+                build_path: options.dest
+                builder: builder
             server.run()
+            console.log "Listening on " + server.url()
         options: ->
             @options 'f',
                 alias : 'makefile'
                 default : DEFAULT_MAKEFILE_PATH
+            .describe("f","Use a custom Makefile.")
             .options 'p', 
                 alias : 'port'
                 default : 10000
+            .describe("f","ReadyMade Server port.")
             .options 'h', 
                 alias : 'host'
                 default : 'localhost'
+            .describe("f","ReadyMade Server port.")
+            .options 'd', 
+                alias : 'dest'
+                default : '.'
             .usage('Usage: readymade server -h [host] -p [port] -f [Makefile]')
         description: "launch readymade's http server"
 

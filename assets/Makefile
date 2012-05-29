@@ -1,56 +1,98 @@
-
-
+##############################
 # CoffeeScript
-%.js: %.coffee
-	coffee -c $^
+# (.cofee) -> (.js)
+${build_path}/%.js: %.coffee
+	mkdir -p `dirname $@`
+	coffee -o `dirname $@` -c $^ 
 
-# Uglify-js
-%.min.js: %.js
-	uglifyjs -o $@ $^
-
+##############################
 # Coco
-%.js: %.coco
+# (.coco) -> (.js)
+${build_path}/%.js: %.coco
+	mkdir -p `dirname $@`
 	coco -c $^
 
+
+##############################
 # LiveScript
-%.js: %.ls
+# (.ls) -> (.js)
+${build_path}/%.js: %.ls
+	mkdir -p `dirname $@`
 	livescript -c $^
 
+
+##############################
+# Uglify-js
+# (.js) -> (.min.js)
+${build_path}/%.min.js: %.js
+	mkdir -p `dirname $@`
+	uglifyjs -o $@ $^
+
+# requiring intermediate file
+${build_path}/%.min.js: ${build_path}/%.js
+	mkdir -p `dirname $@`
+	uglifyjs -o $@ $^
+
+
+##############################
 # Less CSS
-%.css: %.less
+# (.less) -> (.css)
+${build_path}/%.css: %.less
+	mkdir -p `dirname $@`
 	lessc $^ $@
 
-# Sass (.sass)
-%.css: %.scss
+##############################
+#  Sass 
+# (.scss) -> (.css)
+${build_path}/%.css: %.scss
+	mkdir -p `dirname $@`
 	sass $^ $@
 
-# Sass (.sass)
-%.css: %.sass
+# (.sass) -> (.css)
+${build_path}/%.css: %.sass
+	mkdir -p `dirname $@`
 	sass $^ $@
 
-# Stylus (.styl)
-%.css: %.styl
+##############################
+# Stylus
+# (.styl) -> .css
+${build_path}/%.css: %.styl
+	mkdir -p `dirname $@`
 	stylus $^
 
-# compiles html files using markitup
-%.html: %.md %.jade
+##############################
+# Markdown (via markitup)
+# (.md) + (.jade) ->(.html)
+${build_path}/%.html: %.md %.jade
+	mkdir -p `dirname $@`
 	markitup -t $(word 2,$^) $< --output `dirname $@`
 
+# (.md) + (default.jade) ->(.html)
 .SECONDEXPANSION:
-%.html: %.md $$(dir %)default.jade
+${build_path}/%.html: %.md $$(dir %)default.jade 
+	mkdir -p $(dir $^)
 	markitup -t $(word 2,$^) $< --output `dirname $@`
 
-# Fallback to default if the specific template does not exists.
-#%.html: %.md $(dir %)default.jade
-#	markitup -t $(word 2,$^) $< --output `dirname $@`
-
+# (.md) -> (.html)
 # Fallback to markdown default template if template does not exists
-%.html: %.md ${ASSET_PATH}/readymademd.jade ${ASSET_PATH}/readymademd.css
+${build_path}/%.html: %.md
+	mkdir -p `dirname $@`
 	markitup -t ${ASSET_PATH}/readymademd.jade $< --output `dirname $@`
 
-%: %
 
-favicon.ico: ${ASSET_PATH}/favicon.ico
+# (.md) -> (.html)
+# Fallback to markdown default template if template does not exists
+${build_path}/%: %
+	mkdir -p `dirname $@`
+	cp $^ $@
+
+
+${build_path}/%.ico: %.png
+	mkdir -p `dirname $@`
+	convert $^ -resize 16x16! $@
+
+${build_path}/%.ico: ${ASSET_PATH}/%.ico
+	mkdir -p `dirname $@`
 	cp $^ $@
 
 
