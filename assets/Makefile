@@ -1,3 +1,5 @@
+
+
 # CoffeeScript
 %.js: %.coffee
 	coffee -c $^
@@ -13,8 +15,6 @@
 # LiveScript
 %.js: %.ls
 	livescript -c $^
-
-
 
 # Less CSS
 %.css: %.less
@@ -36,9 +36,13 @@
 %.html: %.md %.jade
 	markitup -t $(word 2,$^) $< --output `dirname $@`
 
-# Fallback to default if the specific template does not exists.
-%.html: %.md layout.jade
+.SECONDEXPANSION:
+%.html: %.md $$(dir %)default.jade
 	markitup -t $(word 2,$^) $< --output `dirname $@`
+
+# Fallback to default if the specific template does not exists.
+#%.html: %.md $(dir %)default.jade
+#	markitup -t $(word 2,$^) $< --output `dirname $@`
 
 # Fallback to markdown default template if template does not exists
 %.html: %.md ${ASSET_PATH}/readymademd.jade ${ASSET_PATH}/readymademd.css
