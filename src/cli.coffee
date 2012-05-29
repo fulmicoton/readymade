@@ -46,7 +46,7 @@ argument_parser = cli_action
             .describe("f","ReadyMade Server port.")
             .options 'd', 
                 alias : 'dest'
-                default : '.'
+                default : './.readymade'
             .usage('Usage: readymade server -h [host] -p [port] -f [Makefile]')
         description: "launch readymade's http server"
 

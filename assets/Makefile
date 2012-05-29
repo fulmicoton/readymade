@@ -70,7 +70,7 @@ ${build_path}/%.html: %.md %.jade
 # (.md) + (default.jade) ->(.html)
 .SECONDEXPANSION:
 ${build_path}/%.html: %.md $$(dir %)default.jade 
-	mkdir -p $(dir $^)
+	mkdir -p `dirname $@`
 	markitup -t $(word 2,$^) $< --output `dirname $@`
 
 # (.md) -> (.html)
@@ -79,13 +79,11 @@ ${build_path}/%.html: %.md
 	mkdir -p `dirname $@`
 	markitup -t ${ASSET_PATH}/readymademd.jade $< --output `dirname $@`
 
-
 # (.md) -> (.html)
 # Fallback to markdown default template if template does not exists
 ${build_path}/%: %
 	mkdir -p `dirname $@`
 	cp $^ $@
-
 
 ${build_path}/%.ico: %.png
 	mkdir -p `dirname $@`
