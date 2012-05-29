@@ -34,6 +34,6 @@ class Builder
     onError: (options)->
         console.log options.msg
         msg = options.msg.trim().split("\n")[0]
-        growl? msg, {title: options.target + " build failed."}
+        growl? msg#, {title: options.target + " build failed."}
 
 module.exports = Builder
