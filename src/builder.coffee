@@ -2,15 +2,19 @@ child_process = require 'child_process'
 path = require 'path'
 growl = require 'growl'
 
+
+
+NODE_BIN_PATH = "./node_modules/.bin/"
+
 extend=(c, objs...)->
     for obj in objs
         for k,v of obj
             c[k] = v
     c
 
-ASSET_PATH = path.join __dirname, '../assets/' 
+ASSET_PATH = path.join __dirname, '../assets/'
 ENVIRONMENT = extend {}, process.env, 'ASSET_PATH': ASSET_PATH
-
+ENVIRONMENT.PATH = (ENVIRONMENT.PATH ? "") + ":" + NODE_BIN_PATH
 
 class Builder
     
