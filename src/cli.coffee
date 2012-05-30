@@ -1,10 +1,12 @@
 Server = require '../lib/server'
 Builder = require '../lib/builder'
 cli_action = require '../lib/cli_action'
+style = require '../lib/style'
 path = require 'path'
-
+terminal = require 'color-terminal'
 
 DEFAULT_MAKEFILE_PATH = path.join __dirname, '../assets/Makefile'
+
 
 argument_parser = cli_action
 
@@ -30,7 +32,8 @@ argument_parser = cli_action
                 build_path: options.dest
                 builder: builder
             server.run()
-            console.log "Listening on " + server.url()
+            terminal.write "Listening on "
+            terminal.color(style.URL).write(server.url()).reset().nl()
         options: ->
             @options 'f',
                 alias : 'makefile'

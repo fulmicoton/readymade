@@ -1,10 +1,11 @@
+style = require '../lib/style'
 http = require 'http'
 fs = require 'fs' 
 path = require 'path'
 mime = require 'mime'
 jade = require 'jade'
 path = require 'path'
-
+terminal = require 'color-terminal'
 
 ROOT_PATH = path.join __dirname, '../'
 
@@ -57,12 +58,17 @@ class Server
     handle: (request, response)->
         response.setHeader "Access-Control-Allow-Origin", "*"
         url = request.url
-        console.log 'GET ', url
         url_base = url.split('?', 1)[0]
         target = path.join @build_path, url_base
         serve_file = (target)->
+            terminal.color(style.GET).write 'GET   '
+            terminal.color(style.TARGET).write(url).nl().reset()
             serve_static_file response, target
         failure_callback = (error_msg)->
+            growl? options.target + " build failed."
+            terminal.color(style.ERROR).write 'ERROR '
+            terminal.color(style.TARGET).write(url).nl().reset()
+            terminal.right(2).color(style.TEXT).write(error_msg).nl().reset()
             response.writeHead 404
             response.end TEMPLATES.error404
                 filepath: target

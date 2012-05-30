@@ -1,7 +1,7 @@
 child_process = require 'child_process'
 path = require 'path'
 growl = require 'growl'
-
+style = require './style'
 
 
 NODE_BIN_PATH = "./node_modules/.bin/"
@@ -31,13 +31,6 @@ class Builder
             if (code == 0)
                 success target
             else
-                @onError
-                    msg: error_msg
-                    target: target
-                failure error_msg
-    
-    onError: (options)->
-        console.log options.msg
-        growl? options.target + " build failed."
+                failure error_msg.trim()
 
 module.exports = Builder
