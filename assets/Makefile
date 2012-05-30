@@ -25,9 +25,6 @@ ${build_path}/%.js: %.ls
 # Uglify-js
 # (.js) -> (.min.js)
 ${build_path}/%.min.js: %.js
-	mkdir -p `dirname $@`
-	uglifyjs -o $@ $^
-
 # requiring intermediate file
 ${build_path}/%.min.js: ${build_path}/%.js
 	mkdir -p `dirname $@`
