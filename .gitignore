@@ -12,5 +12,6 @@ pids
 logs
 results
 
+.readymade
 node_modules
 npm-debug.log
