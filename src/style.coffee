@@ -6,9 +6,9 @@ module.exports =
 		foreground: "blue"
 	TARGET:
 		foreground: "black"
-		attribute: "bold"
 	GET:
 		foreground: "green"
+		attribute: "bold"
 	ERROR:
 		foreground: "red"
 	TEXT:
