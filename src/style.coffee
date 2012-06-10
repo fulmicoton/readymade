@@ -13,3 +13,6 @@ module.exports =
 		foreground: "red"
 	TEXT:
 		foreground: "black"
+	LABEL:
+		foreground: "blue"
+		attribute: "bold"

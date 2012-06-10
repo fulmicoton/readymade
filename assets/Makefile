@@ -1,3 +1,7 @@
+ifdef ${extra_makefile}
+	include ${extra_makefile}
+	endif
+
 ##############################
 # CoffeeScript
 # (.cofee) -> (.js)
@@ -62,19 +66,19 @@ ${build_path}/%.css: %.styl
 # (.md) + (.jade) ->(.html)
 ${build_path}/%.html: %.md %.jade
 	mkdir -p `dirname $@`
-	markitup -t $(word 2,$^) $< --output `dirname $@`
+	markitup --unsafe -t $(word 2,$^) $< --output `dirname $@`
 
 # (.md) + (default.jade) ->(.html)
 .SECONDEXPANSION:
 ${build_path}/%.html: %.md $$(dir %)default.jade 
 	mkdir -p `dirname $@`
-	markitup -t $(word 2,$^) $< --output `dirname $@`
+	markitup --unsafe -t $(word 2,$^) $< --output `dirname $@`
 
 # (.md) -> (.html)
 # Fallback to markdown default template if template does not exists
 ${build_path}/%.html: %.md
 	mkdir -p `dirname $@`
-	markitup -t ${ASSET_PATH}/readymademd.jade $< --output `dirname $@`
+	markitup --unsafe -t ${ASSET_PATH}/readymademd.jade $< --output `dirname $@`
 
 # (.md) -> (.html)
 # Fallback to markdown default template if template does not exists

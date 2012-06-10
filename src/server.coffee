@@ -61,10 +61,10 @@ class Server
         url_base = url.split('?', 1)[0]
         target = path.join @build_path, url_base
         serve_file = (target)->
-            terminal.color(style.GET).write 'GET   '
+            terminal.color(style.GET).write('GET   ').reset()
             terminal.color(style.TARGET).write(url).nl().reset()
             serve_static_file response, target
-        failure_callback = (error_msg)->
+        failure_callback = (target, error_msg)->
             growl? options.target + " build failed."
             terminal.color(style.ERROR).write 'ERROR '
             terminal.color(style.TARGET).write(url).nl().reset()

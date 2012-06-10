@@ -1,14 +1,10 @@
 optimist = require 'optimist'
-
-
-ljust = (s, n)->
-    res = s
-    for i in [s.length...n]
-        res += " "
-    res
+terminal = require 'color-terminal'
+style = require '../lib/style'
+ljust = require('./utils').ljust
 
 class ActionParser
-
+    
     constructor: (@actions)->
 
     parse: (argv=process.argv[2..])->
@@ -35,14 +31,18 @@ class ActionParser
         else
             throw "Action #{action_id} not available"
     
-    help:(msg)->
-        if msg?
-            console.log "-----------------------------------------------"
-            console.log msg
-            console.log "-----------------------------------------------\n"
-        console.log "Available actions are"
+    help: ()->
+        console.log "  Available actions are"
+        max_action_length = Math.max.apply(Math, k.length for k,v of @actions)
         for k,v of @actions
-            console.log "  ", ljust(k,25), v.description
+            action_label = ljust(k, max_action_length+3)
+            terminal.color(style.LABEL)
+                .write(action_label)
+                .reset()
+                .write("   ")
+                .write(v.description)
+                .nl()
+        terminal.nl()
 
 module.exports = (actions)->
     new ActionParser actions
