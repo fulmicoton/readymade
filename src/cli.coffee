@@ -26,7 +26,10 @@ argument_parser = cli_action
                 builder: builder
             server.run()
             terminal.write "Listening on "
-            terminal.color(style.URL).write(server.url()).reset().nl()
+            terminal.color(style.URL)
+                    .write(server.url())
+                    .reset()
+                    .nl()
         options: ->
             @options 'f',
                 alias : 'makefile'

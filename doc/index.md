@@ -29,7 +29,7 @@ For instance, if you have a CoffeeScript source file in
 
 and you request for 
 
-	http://localhost:10000/js/myfile.js
+    http://localhost:10000/js/myfile.js
 
 Your CoffeeScript file will get compiled and served.
 
@@ -48,7 +48,7 @@ You can also build most of assets using one single command.
 
 You may also write all your targets' path (one per line) in a target file and build all of them at once via
 
-	readymade build -t <your-target-file>
+    readymade build -t <your-target-file>
 
 By default, files are compiled in place.  You can define a specific build 
 directory by 
@@ -61,72 +61,94 @@ Formats handled by default
 
 
 <table>
-	<thead>
-		<tr>
-			<th>Type of asset</th>
-			<th>Target file</th>
-			<th>Source file</th>
-			<th>Compiler installation</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>[CoffeeScript](http://coffeescript.org/)</td>
-			<td>.js</td>
-			<td>.coffee</td>
-			<td class='command'>npm install coffee-script</td>
-		</tr>
-		<tr>
-			<td>[Coco](http://satyr.github.com/coco/)</td>
-			<td>.js</td>
-			<td>.coco</td>
-			<td class='command'>npm install coco</td>
-		</tr>
-		<tr>
-			<td>[LiveScript](http://gkz.github.com/LiveScript/)</td>
-			<td>.js</td>
-			<td>.ls</td>
-			<td class='command'>npm install livescript</td>
-		</tr>
-		<tr>
-			<td>[Less](http://lesscss.org/)</td>
-			<td>.css</td>
-			<td>.less</td>
-			<td class='command'>npm install less</td>
-		</tr>
-		<tr>
-			<td>[Sass](http://sass-lang.com/)</td>
-			<td>.css</td>
-			<td>.scss or .sass</td>
-			<td class='command'>gem install sass</td>
-		</tr>
-		<tr>
-			<td>[Stylus](http://learnboost.github.com/stylus/)</td>
-			<td>.css</td>
-			<td>.styl</td>
-			<td class='command'>npm install stylus</td>
-		</tr>
-		<tr>
-			<td>[Uglify JS](https://github.com/mishoo/UglifyJS)</td>
-			<td>.min.js</td>
-			<td>.js</td>
-			<td class='command'>npm install uglifyjs</td>
-		</tr>
-		<tr>
-			<td>[Markdown](https://github.com/nathan-lafreniere/markitup)</td>
-			<td>.html</td>
-			<td>.md</td>
-			<td class='command'>npm install markitup</td>
-		</tr>
-		<tr>
-			<td>[Markdown and Jade](https://github.com/nathan-lafreniere/markitup)</td>
-			<td>.html</td>
-			<td>.md and .jade</td>
-			<td class='command'>npm install markitup</td>
-		</tr>
+    <thead>
+        <tr>
+            <th>Type of asset</th>
+            <th>Target file</th>
+            <th>Source file</th>
+            <th>Compiler installation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>[CoffeeScript](http://coffeescript.org/)</td>
+            <td>.js</td>
+            <td>.coffee</td>
+            <td class='command'>npm install coffee-script</td>
+        </tr>
+        <tr>
+            <td>[Coco](http://satyr.github.com/coco/)</td>
+            <td>.js</td>
+            <td>.coco</td>
+            <td class='command'>npm install coco</td>
+        </tr>
+        <tr>
+            <td>[LiveScript](http://gkz.github.com/LiveScript/)</td>
+            <td>.js</td>
+            <td>.ls</td>
+            <td class='command'>npm install livescript</td>
+        </tr>
+        <tr>
+            <td>[Less](http://lesscss.org/)</td>
+            <td>.css</td>
+            <td>.less</td>
+            <td class='command'>npm install less</td>
+        </tr>
+        <tr>
+            <td>[Sass](http://sass-lang.com/)</td>
+            <td>.css</td>
+            <td>.scss or .sass</td>
+            <td class='command'>gem install sass</td>
+        </tr>
+        <tr>
+            <td>[Stylus](http://learnboost.github.com/stylus/)</td>
+            <td>.css</td>
+            <td>.styl</td>
+            <td class='command'>npm install stylus</td>
+        </tr>
+        <tr>
+            <td>[Uglify JS](https://github.com/mishoo/UglifyJS)</td>
+            <td>.min.js</td>
+            <td>.js</td>
+            <td class='command'>npm install uglifyjs</td>
+        </tr>
+        <tr>
+            <td>[Markdown](https://github.com/nathan-lafreniere/markitup)</td>
+            <td>.html</td>
+            <td>.md</td>
+            <td class='command'>npm install markitup</td>
+        </tr>
+        <tr>
+            <td>[Markdown and Jade](https://github.com/nathan-lafreniere/markitup)</td>
+            <td>.html</td>
+            <td>.md and .jade</td>
+            <td class='command'>npm install markitup</td>
+        </tr>
 
-	</tbody>
+    </tbody>
 </table>
+
+
+
+How to extend
+------------------------
+
+ReadyMade works on Makefile.
+You can define extend [its default configuration](https://github.com/poulejapon/readymade/blob/master/assets/Makefile) by writing your own building rule.
+
+For instance, I could define the way to define a rule to copy files to .copy
+file by creating and editing readymade.Makefile.
+
+    ##############################
+    # Copy file
+    # (.*) -> (.*.copy)
+    ${build_path}/%.copy: %
+        mkdir -p `dirname $@`
+        cp $^ $@
+
+This rule will be active if you run either **readymade serve** or
+**readymade build** with the -f readymade.Makefile option.
+
 
 
 

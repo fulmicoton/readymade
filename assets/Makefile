@@ -1,10 +1,14 @@
-ifdef ${extra_makefile}
-	include ${extra_makefile}
-	endif
+ifdef extra_makefile
+   include $(extra_makefile)
+endif
+
+${build_path}/%.html.copy: %.html
+	mkdir -p `dirname $@`
+	cp $^ $@
 
 ##############################
 # CoffeeScript
-# (.cofee) -> (.js)
+# (.coffee) -> (.js)
 ${build_path}/%.js: %.coffee
 	mkdir -p `dirname $@`
 	coffee -o `dirname $@` -c $^ 
