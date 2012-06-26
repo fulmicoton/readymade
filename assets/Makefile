@@ -1,6 +1,12 @@
-ifdef extra_makefile
-   include $(extra_makefile)
-endif
+#ifdef extra_makefile
+#   include $(extra_makefile)
+#endif
+
+
+${build_path}/%.js: %.coffee
+	mkdir -p `dirname $@`
+	coffee -o `dirname $@` -c $^ 
+
 
 ${build_path}/%.html.copy: %.html
 	mkdir -p `dirname $@`
@@ -28,7 +34,6 @@ ${build_path}/%.js: %.ls
 	mkdir -p `dirname $@`
 	livescript -c $^
 
-
 ##############################
 # Uglify-js
 # (.js) -> (.min.js)
@@ -45,6 +50,15 @@ ${build_path}/%.min.js: ${build_path}/%.js
 ${build_path}/%.css: %.less
 	mkdir -p `dirname $@`
 	lessc $^ $@
+
+##############################
+# Less CSS
+# (.less) -> (.css)
+${build_path}/%.js: %.mustaches
+${build_path}/%.js: %.mustache
+${build_path}/%.js: %.hogan
+	mkdir -p `dirname $@`
+	hulk $^ > $@
 
 ##############################
 #  Sass 

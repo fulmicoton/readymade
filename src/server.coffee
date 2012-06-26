@@ -59,7 +59,7 @@ class Server
         response.setHeader "Access-Control-Allow-Origin", "*"
         url = request.url
         url_base = url.split('?', 1)[0]
-        target = path.join @build_path, url_base
+        rel_path = path.join ".", url_base
         serve_file = (target)->
             terminal.color(style.GET).write('GET   ').reset()
             terminal.color(style.TARGET).write(url).nl().reset()
@@ -73,7 +73,7 @@ class Server
             response.end TEMPLATES.error404
                 filepath: target
                 error_msg: error_msg
-        @builder.build target, serve_file, failure_callback
+        @builder.build rel_path, serve_file, failure_callback
 
 
     url: ->
