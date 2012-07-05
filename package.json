@@ -30,4 +30,5 @@
 , "directories": {
 	"lib": "./lib"
  }
+, "main": "./lib/express.js"
 }

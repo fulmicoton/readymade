@@ -4,15 +4,9 @@ growl = require 'growl'
 style = require './style'
 terminal = require 'color-terminal'
 rjust = require('./utils').rjust
+extend = require('./utils').extend
 
 NODE_BIN_PATH = "./node_modules/.bin/"
-
-extend=(c, objs...)->
-    for obj in objs
-        for k,v of obj
-            c[k] = v
-    c
-
 ASSET_PATH = path.join __dirname, '../assets/'
 ENVIRONMENT = extend {}, process.env, 'ASSET_PATH': ASSET_PATH
 ENVIRONMENT.PATH = (ENVIRONMENT.PATH ? "") + ":" + NODE_BIN_PATH
