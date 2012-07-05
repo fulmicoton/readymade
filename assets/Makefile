@@ -52,13 +52,9 @@ ${build_path}/%.css: %.less
 	lessc $^ $@
 
 ##############################
-# Less CSS
-# (.less) -> (.css)
-${build_path}/%.js: %.mustaches
-${build_path}/%.js: %.mustache
-${build_path}/%.js: %.hogan
+${build_path}/templates.js: %/mustaches
 	mkdir -p `dirname $@`
-	hulk $^ > $@
+	hulk $^/* > $@
 
 ##############################
 #  Sass 
@@ -101,8 +97,9 @@ ${build_path}/%.html: %.md
 # (.md) -> (.html)
 # Fallback to markdown default template if template does not exists
 ${build_path}/%: %
-	mkdir -p `dirname $@`
-	cp $^ $@
+	mkdir -p `dirname $@`;
+	cp $^ $@;
+
 
 ${build_path}/%.ico: %.png
 	mkdir -p `dirname $@`

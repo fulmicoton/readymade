@@ -124,7 +124,12 @@ Formats handled by default
             <td>.md and .jade</td>
             <td class='command'>npm install markitup</td>
         </tr>
-
+        <tr>
+            <td>[Mustache templates<br/>(via Hogan)](http://twitter.github.com/hogan.js/)</td>
+            <td>templates.js</td>
+            <td>a "mustaches" directory containing all your templates.</td>
+            <td class='command'>npm install markitup</td>
+        </tr>
     </tbody>
 </table>
 
