@@ -7,6 +7,10 @@ jade = require 'jade'
 path = require 'path'
 terminal = require 'color-terminal'
 
+# handling change in API starting node v0.8
+existsSync = fs.existsSync || path.existsSync
+
+
 ROOT_PATH = path.join __dirname, '../'
 
 load_template_sync = (rel_path)->
@@ -28,7 +32,7 @@ serve_directory_listing = (response, directory_path)->
 
 serve_static_file = (response,filepath)->
     try
-        if path.existsSync filepath
+        if existsSync filepath
             stat =  fs.statSync filepath
             if stat.isDirectory()
                 serve_directory_listing response,filepath
