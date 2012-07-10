@@ -2,10 +2,12 @@ repeat = (n, s=" ")->
 	Array(n+1).join(s)
 
 ljust = (s, n)->
-	repeat(n-s.length) + s
+	indent = Math.max 1,(n-s.length)
+	repeat(indent) + s
 
 rjust = (s, n)->
-	s + repeat(n-s.length)
+	indent = Math.max 1,(n-s.length)
+	s + repeat indent
 
 extend=(c, objs...)->
     for obj in objs

@@ -1,6 +1,6 @@
-#ifdef extra_makefile
-#   include $(extra_makefile)
-#endif
+ifdef extra_makefile
+   include $(extra_makefile)
+endif
 
 
 ${build_path}/%.js: %.coffee
