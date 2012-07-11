@@ -3,7 +3,7 @@
 ReadyMade makes it easier for webdevelopers and designers to work with 
 assets that requires compilation : CoffeeScript, Less css, Sass, Stylus, Uglify, markdown ... and obviously all of your static files that don't require compilation (images, css, js, etc.).
 
-
+I can work as a standalone serve or integrate with ExpressJS.
 
 
 
@@ -53,7 +53,7 @@ You may also write all your targets' path (one per line) in a target file and bu
 By default, files are compiled in place.  You can define a specific build 
 directory by 
 
-   readymade build -t <your-target-file> -d <your-build-dir>
+    readymade build -t <your-target-file> -d <your-build-dir>
 
 
 Formats handled by default
@@ -127,7 +127,7 @@ Formats handled by default
         <tr>
             <td>[Mustache templates<br/>(via Hogan)](http://twitter.github.com/hogan.js/)</td>
             <td>templates.js</td>
-            <td>a "mustaches" directory containing all your templates.</td>
+            <td>a "mustaches" directory<br/>containing all your templates.</td>
             <td class='command'>npm install markitup</td>
         </tr>
     </tbody>
@@ -152,7 +152,9 @@ file by creating and editing readymade.Makefile.
         cp $^ $@
 
 This rule will be active if you run either **readymade serve** or
-**readymade build** with the -f readymade.Makefile option.
+**readymade build** with the -f option :
+
+    readymade serve -f readymade.Makefile
 
 
 
@@ -173,7 +175,33 @@ Once it is installed, you can install readymade via
 You will also need to install separately all of the compilers you need.
 
 
- 
+
+
+Integrate with express
+-----------------------------------
+
+
+Readymade is up and running just by adding one line in your app.configure:
+
+    app.configure(function(){
+        // ... 
+        app.use(require('readymade').middleware({root: "public"}));
+        // ... 
+    });
+
+Readymade will then server the content within **./public** content on **/public**.
+In order to extend readymade with your own building rules, just pass the path to your
+makefile with the **makefile** option.
+
+    app.configure(function(){
+        // ... 
+        var readymadeOptions = {
+            root: "public",
+            makefile:"./readymade.Makefile"
+        };
+        app.use(require('readymade').middleware(readymadeOptions));
+        // ... 
+    }); 
 
  More help
 ------------------------------------
