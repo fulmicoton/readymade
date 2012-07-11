@@ -7,8 +7,11 @@ all: bin/readymade
 lib/%.js: src/%.coffee
 	coffee -o lib -c $< 
 
-htmldoc: 
-	readymade build doc/index.html
+doc: doc/index.html
+	@echo "Building doc"
+
+doc/%.html: doc/%.md
+	readymade build $@
 
 bin/readymade: ${TARGETS}
 	echo "#!/usr/bin/env node" > bin/readymade
