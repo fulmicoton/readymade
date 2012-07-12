@@ -86,7 +86,7 @@ Formats handled by default
             <td>[LiveScript](http://gkz.github.com/LiveScript/)</td>
             <td>.js</td>
             <td>.ls</td>
-            <td class='command'>npm install livescript</td>
+            <td class='command'>npm install LiveScript</td>
         </tr>
         <tr>
             <td>[Less](http://lesscss.org/)</td>
@@ -209,3 +209,5 @@ makefile with the **makefile** option.
 Get more information about command-line options via :
 
     readymade help (action)
+
+
