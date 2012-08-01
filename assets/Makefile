@@ -73,7 +73,7 @@ ${build_path}/%.css: %.sass
 # (.styl) -> .css
 ${build_path}/%.css: %.styl
 	mkdir -p `dirname $@`
-	stylus $^
+	stylus -o `dirname $@` $^
 
 ##############################
 # Markdown (via markitup)
