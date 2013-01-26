@@ -7,7 +7,7 @@ all: bin/readymade
 lib/%.js: src/%.coffee
 	coffee -o lib -c $< 
 
-doc: doc/index.html doc/css/readymade.css
+build-doc: doc/index.html doc/css/readymade.css
 	@echo "Building doc"
 
 doc/%:
