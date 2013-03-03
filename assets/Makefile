@@ -41,8 +41,7 @@ ${build_path}/%.min.js: %.js
 # requiring intermediate file
 ${build_path}/%.min.js: ${build_path}/%.js
 	mkdir -p `dirname $@`
-	uglifyjs -o $@ $^
-
+	uglifyjs -o $@ $^ --comments  
 
 ##############################
 # Less CSS
