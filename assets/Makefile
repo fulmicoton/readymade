@@ -51,9 +51,9 @@ ${build_path}/%.css: %.less
 	lessc $^ $@
 
 ##############################
-${build_path}/templates.js: %/mustaches
+${build_path}/%.mustaches.js: %
 	mkdir -p `dirname $@`
-	hulk $^/* > $@
+	hulk `ls $^/*` > $@
 
 ##############################
 #  Sass 
