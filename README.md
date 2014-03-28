@@ -1,7 +1,7 @@
 Readymade
 =====================================
 
-[Readymade](http://poulejapon.github.com/readymade/) is a development server for webprogrammers.
+[Readymade](http://fulmicoton.com/readymade/) is a development server for webprogrammers.
 
 
 In addition to static files, some of your assets (JavaScript, CSS, Images, ...) have to be compiled before being served to your browser.
