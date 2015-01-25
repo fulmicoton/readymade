@@ -13,6 +13,13 @@ ${build_path}/%.html.copy: %.html
 	cp $^ $@
 
 ##############################
+# CJSX (react jsx for coffeescript)
+# (.cjsx) -> (.coffee)
+${build_path}/%.js: %.cjsx
+	mkdir -p `dirname $@`
+	cjsx-transform $^ | coffee -s -c > $@
+
+##############################
 # CoffeeScript
 # (.coffee) -> (.js)
 ${build_path}/%.js: %.coffee
